@@ -1,17 +1,26 @@
+body{
+    font-family: 'Roboto';
+}
 h1{
     font-size: 50px;
-    font-family: 'Roboto', ;
     text-align: center;
 }
-.card-body{
-    height: 60%;
+.card{
+    border: 0px;
+    align-content: center;
+}
 
-}
-.card-text{
-    border: dashed;
-    ;
-}
-.card-title{
+.title{
     font-weight: bolder;
     font-size: 25px;
+    padding: 10px;
+}
+
+#password{
+    border: dashed;
+    height: 100px;
+    max-width: 80%;
+    text-align: center;
+    margin: 20px;
+    
 }

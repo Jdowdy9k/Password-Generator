@@ -26,30 +26,28 @@
     </div>
 
 
-    <div class="card" style="width: 60%;margin: auto;">
-        <div class="card-body">
-            <div class="shadow-lg p-3 mb-5 bg-white rounded">
-                <div class="row">
-                    <div class="col-lg-8">
+    <div class="container" style="width: 50%;margin: auto;padding: 30px;">
+        <div class="shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="row">
+                <div class="col-lg-12">
 
+                    <h5 class="title">Generate a Password!</h5>
 
-                        <h5 class="card-title">Generate a Password!</h5>
+                    <textarea id="password" placeholder="Your Secure Password"
+                        aria-label="Generated Password"></textarea>
 
-                        <p class="card-text">Your Secure Password</p>
-
-                        <div class="row">
-                            <div class="col text-center">
-                                <button type="button" class="btn btn-primary btn-lg" button
-                                    onclick="generatePassword()">Generate Password</button>
-                            </div>
-                        </div>
+                    <div class="row justify-content-center">
+                        <button type="submit" class="btn btn-primary mx-auto btn-lg" button
+                            onclick="generate();">Generate Password</button>
                     </div>
-
-
                 </div>
+
             </div>
+
+
         </div>
     </div>
+
 
 
 
@@ -70,23 +68,63 @@
         </script>
 
     <script>
-        function generatePassword() {
-            var length = 8,
-                charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
-                retVal = "";
-            for (var i = 0, n = charset.length; i < length; ++i) {
-                retVal += charset.charAt(Math.floor(Math.random() * n));
+        var randomCharString = "";
+        var charSet = [
+            {
+                char: "!#$%&'()*+,-./:;<=>?@[]^_`{|}~",
+                name: "Special Characters",
+                use: false
+            },
+            {
+                char: "0123456789",
+                name: "Number Characters",
+                use: false
+            },
+            {
+                char: "abcdefghijklmnopqrstuvwxyz",
+                name: "Lowercase Letters",
+                use: false
+            },
+            {
+                char: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+                name: "Uppercase Letters",
+                use: false
             }
-            return retVal;
+        ]
+        var generate = () => {
+            var passwordLength = parseInt(prompt("Please choose a password length between 8 and 128 characters."));
+            var passwordString = "";
+
+
+            if (passwordLength > 8 && passwordLength < 128) {
+                charSet.forEach(set => {
+                    var useChar = (prompt(`Do you want to use ${set.name}?`)).toLowerCase();
+                    if (useChar === "yes" || useChar === "y") {
+                        set.use = true;
+                    }
+                    if (set.use) {
+                        randomCharString = randomCharString + set.char;
+                    }
+                });
+                console.log()
+            }
+            else {
+                alert("Your password does not meet the requirements. Please refresh and try again.");
+            }
+
+            if (randomCharString !== "") {
+                for (i = 1; i <= passwordLength; i++) {
+                    passwordString = passwordString + randomCharString.charAt(Math.floor(Math.random() * Math.floor((randomCharString.length) - 1)));
+                }
+
+                document.getElementById("password").value = passwordString;
+            }
+            else {
+                alert("You must use at least one kind of character. Please refresh and try again.");
+            }
         }
-        console.log()
+
     </script>
-
-
-
-
-    
-
 
 
 </body>
