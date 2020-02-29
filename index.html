@@ -9,6 +9,7 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    
 
     <title>Password Generator</title>
 </head>
@@ -37,8 +38,7 @@
                         aria-label="Generated Password"></textarea>
 
                     <div class="row justify-content-center">
-                        <button type="submit" class="btn btn-primary mx-auto btn-lg" button
-                            onclick="generate();">Generate Password</button>
+                        <button type="submit" class="btn btn-primary mx-auto btn-lg" id="butt">Generate Password</button>
                     </div>
                 </div>
 
@@ -56,7 +56,7 @@
 
 
 
-
+    <script src="script.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
@@ -66,65 +66,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
         </script>
-
-    <script>
-        var randomCharString = "";
-        var charSet = [
-            {
-                char: "!#$%&'()*+,-./:;<=>?@[]^_`{|}~",
-                name: "Special Characters",
-                use: false
-            },
-            {
-                char: "0123456789",
-                name: "Number Characters",
-                use: false
-            },
-            {
-                char: "abcdefghijklmnopqrstuvwxyz",
-                name: "Lowercase Letters",
-                use: false
-            },
-            {
-                char: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-                name: "Uppercase Letters",
-                use: false
-            }
-        ]
-        var generate = () => {
-            var passwordLength = parseInt(prompt("Please choose a password length between 8 and 128 characters."));
-            var passwordString = "";
-
-
-            if (passwordLength > 8 && passwordLength < 128) {
-                charSet.forEach(set => {
-                    var useChar = (prompt(`Do you want to use ${set.name}?`)).toLowerCase();
-                    if (useChar === "yes" || useChar === "y") {
-                        set.use = true;
-                    }
-                    if (set.use) {
-                        randomCharString = randomCharString + set.char;
-                    }
-                });
-                console.log()
-            }
-            else {
-                alert("Your password does not meet the requirements. Please refresh and try again.");
-            }
-
-            if (randomCharString !== "") {
-                for (i = 1; i <= passwordLength; i++) {
-                    passwordString = passwordString + randomCharString.charAt(Math.floor(Math.random() * Math.floor((randomCharString.length) - 1)));
-                }
-
-                document.getElementById("password").value = passwordString;
-            }
-            else {
-                alert("You must use at least one kind of character. Please refresh and try again.");
-            }
-        }
-
-    </script>
 
 
 </body>
